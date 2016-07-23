@@ -9,11 +9,15 @@ class AppContainer extends React.Component {
     const Comp = route.component || NotFound
 
     return (
-      <div>
+      <div className='p2'>
         <h1>AppContainer</h1>
-        <Link href='/' className='btn btn-primary mr1'>Home</Link>
-        <Link href='/app' className='btn btn-primary mr1'>App</Link>
-        <Comp />
+        <nav className='mb2'>
+          <Link href='/' className='btn btn-primary mr1'>Home</Link>
+          <Link href='/app' className='btn btn-primary mr1'>App</Link>
+        </nav>
+        <div>
+          <Comp />
+        </div>
       </div>
     )
   }
