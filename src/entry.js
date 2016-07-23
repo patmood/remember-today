@@ -4,7 +4,8 @@ import { Router } from 'react-context-router'
 import AppContainer from './containers/AppContainer'
 import Home from './components/Home'
 import App from './components/App'
-import './css/index.css'
+import './css/index.scss'
+// import '../node_modules/ace-css/css/ace.css'
 
 const routes = [
   {
