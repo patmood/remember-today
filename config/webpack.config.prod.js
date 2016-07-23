@@ -89,6 +89,7 @@ module.exports = {
       inject: true,
       template: indexHtmlPath,
       favicon: faviconPath,
+      filename: '200.html',
       minify: {
         removeComments: true,
         collapseWhitespace: true,
