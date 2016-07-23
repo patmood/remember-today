@@ -2,6 +2,15 @@
   "name": "remember-today",
   "version": "0.0.1",
   "private": true,
+  "scripts": {
+    "deploy": "gh-pages-deploy",
+    "start": "node ./scripts/start.js",
+    "build": "node ./scripts/build.js"
+  },
+  "gh-pages-deploy": {
+    "staticpath": "build",
+    "cname": "remember.patmoody.com"
+  },
   "devDependencies": {
     "autoprefixer": "6.3.7",
     "babel-core": "6.10.4",
@@ -24,6 +33,7 @@
     "extract-text-webpack-plugin": "1.0.1",
     "file-loader": "0.9.0",
     "fs-extra": "^0.30.0",
+    "gh-pages-deploy": "^0.4.2",
     "html-webpack-plugin": "2.22.0",
     "json-loader": "0.5.4",
     "opn": "4.0.2",
@@ -40,9 +50,5 @@
     "react": "^15.2.1",
     "react-context-router": "^1.0.0",
     "react-dom": "^15.2.1"
-  },
-  "scripts": {
-    "start": "node ./scripts/start.js",
-    "build": "node ./scripts/build.js"
   }
 }
