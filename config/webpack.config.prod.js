@@ -4,6 +4,7 @@ var precss = require('precss');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 // TODO: hide this behind a flag and eliminate dead code on eject.
 // This shouldn't be exposed to the user.
@@ -17,6 +18,7 @@ var srcPath = path.resolve(__dirname, relativePath, 'src');
 var nodeModulesPath = path.join(__dirname, '..', 'node_modules');
 var indexHtmlPath = path.resolve(__dirname, relativePath, 'index.html');
 var faviconPath = path.resolve(__dirname, relativePath, 'favicon.ico');
+var cnamePath = path.resolve(__dirname, relativePath, 'CNAME');
 var buildPath = path.join(__dirname, isInNodeModules ? '../../..' : '..', 'build');
 
 module.exports = {
@@ -89,7 +91,7 @@ module.exports = {
       inject: true,
       template: indexHtmlPath,
       favicon: faviconPath,
-      filename: '200.html',
+      filename: '404.html', // Just for gh-pages
       minify: {
         removeComments: true,
         collapseWhitespace: true,
@@ -119,6 +121,9 @@ module.exports = {
         screw_ie8: true
       }
     }),
-    new ExtractTextPlugin('[name].[contenthash].css')
+    new ExtractTextPlugin('[name].[contenthash].css'),
+    new CopyWebpackPlugin([
+      { from: cnamePath, to: buildPath },
+    ]),
   ]
 };
