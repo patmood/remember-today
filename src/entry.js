@@ -1,6 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Router } from 'react-context-router'
+import firebase from 'firebase'
+import firebaseConfig from '../firebase-config.json'
+
 import AppContainer from './containers/AppContainer'
 import Home from './components/Home'
 import App from './components/App'
@@ -23,3 +26,6 @@ ReactDOM.render(
   </Router>,
   document.getElementById('root')
 )
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig)
