@@ -2,6 +2,7 @@ export default {
   base: {
     counter: 0,
   },
+  pendingRequests: 0,
   // routesPermissions: {
   //   requireAuth: [
   //     '/admin'
