@@ -32,4 +32,5 @@ FirebaseApi
   .catch(err => {
     console.log('Firebase auth error:', err)
     //TODO dispatch auth error action
+    store.dispatch(requestError())
   })

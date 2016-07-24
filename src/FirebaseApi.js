@@ -42,7 +42,7 @@ class FirebaseApi {
     })
   }
 
-  static GetValueByKeyOnce(path, key) {
+  static getValueByKeyOnce(path, key) {
     return firebase
       .database()
       .ref(path)
@@ -51,7 +51,7 @@ class FirebaseApi {
       .once('value')
   }
 
-  static GetChildAddedByKeyOnce(path, key) {
+  static getChildAddedByKeyOnce(path, key) {
     return firebase
       .database()
       .ref(path)

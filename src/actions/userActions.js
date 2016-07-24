@@ -19,7 +19,7 @@ function extractUserProperties(firebaseUser) {
     'isAdmin'
   ]
 
-  userProperties.map((prop) => {
+  userProperties.forEach((prop) => {
     if (prop in firebaseUser) {
       user[prop] = firebaseUser[prop]
     }
@@ -30,10 +30,12 @@ function extractUserProperties(firebaseUser) {
 
 export function userCreated(user) {
   return (dispatch) => {
-    firebaseApi.databaseSet('/users/' + user.uid, extractUserProperties(user))
+    beginRequest()
+    return firebaseApi.databaseSet('/users/' + user.uid, extractUserProperties(user))
       .then(() => {
         dispatch(authLoggedIn(user.uid))
         dispatch(userCreatedSuccess())
+        return user
       })
       .catch(error => {
         dispatch(requestError(error))

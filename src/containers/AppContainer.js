@@ -25,6 +25,10 @@ class AppContainer extends React.Component {
   }
 }
 
+AppContainer.propTypes = {
+  actions: PropTypes.object,
+}
+
 function mapStateToProps(state, ownProps) {
   return {
     base: state.base,
