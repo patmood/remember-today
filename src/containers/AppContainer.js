@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import { increment } from '../actions/baseActions'
 
 import Home from '../components/Home'
+import Registration from './Registration'
 
 class AppContainer extends React.Component {
   render () {
@@ -17,6 +18,7 @@ class AppContainer extends React.Component {
         </nav>
         <div>
           <Home />
+          <Registration />
         </div>
       </div>
     )

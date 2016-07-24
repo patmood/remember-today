@@ -1,12 +1,14 @@
 import { combineReducers } from 'redux'
 import base from './baseReducer'
-import pendingRequests from './pendingRequestsReducer'
+import pendingRequest from './pendingRequestReducer'
 import auth from './authReducer'
+import user from './userReducer'
 
 const rootReducer = combineReducers({
   base,
-  pendingRequests,
+  pendingRequest,
   auth,
+  user,
 })
 
 export default rootReducer

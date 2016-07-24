@@ -2,7 +2,7 @@ export default {
   base: {
     counter: 0,
   },
-  pendingRequests: 0,
+  pendingRequest: 0,
   // routesPermissions: {
   //   requireAuth: [
   //     '/admin'
@@ -12,9 +12,9 @@ export default {
   //   ]
   // },
   // routing: {},
-  // user: {
-  //   isAdmin: undefined
-  // },
+  user: {
+    isAdmin: undefined
+  },
   auth: {
     isLogged: false,
     currentUserUID: null,
