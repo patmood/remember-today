@@ -15,10 +15,9 @@ export default {
   // user: {
   //   isAdmin: undefined
   // },
-  // auth: {
-  //   isLogged: false,
-  //   currentUserUID: null,
-  //   initialized: false
-  // },
-  // ajaxCallsInProgress: 0
+  auth: {
+    isLogged: false,
+    currentUserUID: null,
+    initialized: false
+  },
 };
