@@ -8,13 +8,16 @@ import Registration from './Registration'
 
 class AppContainer extends React.Component {
   render () {
-    const { base, actions } = this.props
+    const { base, user, actions } = this.props
 
     return (
       <div className='p2'>
         <h1>AppContainer</h1>
         <nav className='mb2'>
           <button onClick={actions.increment} className='btn'>+1 ({base.counter})</button>
+          <div className='inline-block right'>
+            {user.email}
+          </div>
         </nav>
         <div>
           <Home />
@@ -32,6 +35,7 @@ AppContainer.propTypes = {
 function mapStateToProps(state, ownProps) {
   return {
     base: state.base,
+    user: state.user,
   }
 }
 
