@@ -45,6 +45,22 @@ export function createUserWithEmailAndPassword(user) {
   }
 }
 
+export function signInWithEmailAndPassword(user) {
+  return (dispatch) => {
+    dispatch(beginRequest())
+    return firebaseApi.signInWithEmailAndPassword(user)
+      .then(
+        user => {
+          dispatch(authLoggedIn(user.uid))
+        })
+      .catch(error => {
+        dispatch(requestError(error))
+        // @TODO better error handling
+        throw(error)
+      })
+  }
+}
+
 export function signOut() {
   return (dispatch, getState) => {
     dispatch(beginRequest())

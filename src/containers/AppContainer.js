@@ -6,6 +6,7 @@ import { signOut } from '../actions/authActions'
 
 import Home from '../components/Home'
 import Registration from './Registration'
+import Signin from './Signin'
 
 class AppContainer extends React.Component {
   render () {
@@ -25,6 +26,7 @@ class AppContainer extends React.Component {
         <div>
           <Home />
           <Registration />
+          <Signin />
         </div>
       </div>
     )
