@@ -45,6 +45,22 @@ export function createUserWithEmailAndPassword(user) {
   }
 }
 
+export function signOut() {
+  return (dispatch, getState) => {
+    dispatch(beginRequest())
+    return firebaseApi.authSignOut()
+      .then(
+        () => {
+          dispatch(authLoggedOutSuccess())
+          // Redirect if they're on a page that requires auth
+        })
+      .catch(error => {
+        dispatch(requestError(error))
+        // @TODO better error handling
+        throw(error)
+      })
+  }
+}
 
 export function authInitializedDone() {
   return {
