@@ -5,6 +5,7 @@ import { increment } from '../actions/baseActions'
 import { signOut } from '../actions/authActions'
 
 import Home from '../components/Home'
+import EditPost from './EditPost'
 import Registration from './Registration'
 import Signin from './Signin'
 
@@ -25,6 +26,7 @@ class AppContainer extends React.Component {
         </nav>
         <div>
           <Home />
+          <EditPost />
           <Registration />
           <Signin />
         </div>

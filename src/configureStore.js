@@ -7,8 +7,8 @@ export default function configureStore(initialState) {
     rootReducer,
     initialState,
     compose(
-        applyMiddleware(thunk),
-        window.devToolsExtension ? window.devToolsExtension() : noop => noop
+      applyMiddleware(thunk),
+      window.devToolsExtension ? window.devToolsExtension() : noop => noop
     ),
   )
 }
