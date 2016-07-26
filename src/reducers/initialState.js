@@ -12,6 +12,7 @@ export default {
   //   ]
   // },
   // routing: {},
+  posts: [],
   user: {
     isAdmin: undefined
   },

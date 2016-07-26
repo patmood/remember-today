@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { postCreate } from '../actions/postActions'
 
 export class EditPost extends React.Component {
   constructor(props, context) {
@@ -14,7 +15,7 @@ export class EditPost extends React.Component {
     }
 
     this.updatePostState = this.updatePostState.bind(this)
-    this.createPost = this.createPost.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   updatePostState(event) {
@@ -24,12 +25,12 @@ export class EditPost extends React.Component {
     return this.setState({post: post})
   }
 
-  createPost(event) {
+  handleSubmit(event) {
     event.preventDefault()
 
     this.setState({saving: true})
 
-    this.props.actions.createPost(this.state.post)
+    this.props.actions.postCreate(this.props.user.uid, this.state.post)
       .then((post) => {
         this.setState({saving: false})
       })
@@ -56,7 +57,7 @@ export class EditPost extends React.Component {
         disabled={saving}
         value={saving ? 'Saving...' : 'Save'}
         className='btn btn-primary'
-        onClick={this.createPost}/>
+        onClick={this.handleSubmit}/>
     </form>
   }
 }
@@ -66,12 +67,14 @@ EditPost.propTypes = {
 }
 
 function mapStateToProps(state, ownProps) {
-  return {}
+  return {
+    user: state.user,
+  }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators({  }, dispatch)
+    actions: bindActionCreators({ postCreate }, dispatch)
   }
 }
 
