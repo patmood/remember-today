@@ -6,6 +6,7 @@ import { signOut } from '../actions/authActions'
 
 import Home from '../components/Home'
 import EditPost from './EditPost'
+import ListPosts from './ListPosts'
 import Registration from './Registration'
 import Signin from './Signin'
 
@@ -27,6 +28,7 @@ class AppContainer extends React.Component {
         <div>
           <Home />
           <EditPost />
+          <ListPosts />
           <Registration />
           <Signin />
         </div>

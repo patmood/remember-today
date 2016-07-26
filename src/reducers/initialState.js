@@ -1,3 +1,5 @@
+import Immutable from 'immutable'
+
 export default {
   base: {
     counter: 0,
@@ -12,7 +14,7 @@ export default {
   //   ]
   // },
   // routing: {},
-  posts: [],
+  posts: new Immutable.Map,
   user: {
     isAdmin: undefined
   },

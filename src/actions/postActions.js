@@ -23,7 +23,7 @@ export function postCreatedSuccess(userUID, postKey) {
     dispatch(beginRequest())
     firebaseApi.getChildAddedByKeyOnce(`/users/${userUID}/posts`, postKey)
       .then(post => {
-        dispatch({ type: 'POST_CREATED_SUCCESS', post: post.val() })
+        dispatch({ type: 'POST_CREATED_SUCCESS', post: post.val(), postKey })
       })
       .catch(error => {
         // TODO: better error handling
