@@ -22,13 +22,13 @@ class AppContainer extends React.Component {
           <button onClick={actions.increment} className='btn left'>+1 ({base.counter})</button>
           <button onClick={actions.signOut} className='btn btn-primary bg-red right'>Sign out</button>
           <div className='inline-block right'>
-            {user.email}
+            { user ? user.email : null }
           </div>
         </nav>
         <div>
           <Home />
           <EditPost />
-          <ListPosts />
+          { user ? <ListPosts /> : null }
           <Registration />
           <Signin />
         </div>

@@ -34,6 +34,13 @@ class FirebaseApi {
       .push()
   }
 
+  static getValueByPathOnce(path) {
+    return firebase
+      .database()
+      .ref(path)
+      .once('value')
+  }
+
   static getValueByKeyOnce(path, key) {
     return firebase
       .database()

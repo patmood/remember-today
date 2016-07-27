@@ -15,9 +15,7 @@ export default {
   // },
   // routing: {},
   posts: new Immutable.Map(),
-  user: {
-    isAdmin: undefined
-  },
+  user: null,
   auth: {
     isLogged: false,
     currentUserUID: null,
