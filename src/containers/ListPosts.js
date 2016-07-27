@@ -4,16 +4,21 @@ import { bindActionCreators } from 'redux'
 import { postCreate } from '../actions/postActions'
 
 export class ListPosts extends React.Component {
-  constructor(props, context) {
-    super(props, context)
+  // constructor(props, context) {
+  //   super(props, context)
+  // }
+
+  componentDidMount () {
+    // get list of posts
   }
 
   render() {
     const { posts } = this.props
     return <div>
       {posts.map((val, key) => <div key={key}>
-        {val.body}
-      </div>)}
+        <div className='bold'>{val.title}</div>
+        <div>{val.body}</div>
+      </div>).toArray()}
     </div>
   }
 }

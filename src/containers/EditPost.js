@@ -9,7 +9,8 @@ export class EditPost extends React.Component {
 
     this.state = {
       post: {
-        body: ''
+        body: '',
+        title: '',
       },
       saving: false
     }
@@ -46,9 +47,17 @@ export class EditPost extends React.Component {
       <h1>Create Post</h1>
       <textarea
         type='text'
+        name='title'
+        placeholder='Title of today'
+        className='input'
+        onChange={this.updatePostState} >
+      </textarea>
+      <textarea
+        type='text'
         name='body'
         placeholder='What happened today?'
         className='input'
+        style={{ minHeight: 200 }}
         onChange={this.updatePostState} >
       </textarea>
 

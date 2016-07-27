@@ -4,8 +4,8 @@ import { requestError, beginRequest } from './pendingRequestActions'
 export function postCreate(userUID, post) {
   return (dispatch) => {
     beginRequest()
-    const postKey = firebaseApi.databasePush(`/users/${userUID}/posts`).key
-    return firebaseApi.databaseSet(`/users/${userUID}/posts/${postKey}`, post)
+    const postKey = firebaseApi.databasePush(`/posts/${userUID}`).key
+    return firebaseApi.databaseSet(`/posts/${userUID}/${postKey}`, post)
       .then(() => {
         dispatch(postCreatedSuccess(userUID, postKey))
         return post
@@ -21,7 +21,7 @@ export function postCreate(userUID, post) {
 export function postCreatedSuccess(userUID, postKey) {
   return (dispatch) => {
     dispatch(beginRequest())
-    firebaseApi.getChildAddedByKeyOnce(`/users/${userUID}/posts`, postKey)
+    firebaseApi.getChildAddedByKeyOnce(`/posts/${userUID}`, postKey)
       .then(post => {
         dispatch({ type: 'POST_CREATED_SUCCESS', post: post.val(), postKey })
       })

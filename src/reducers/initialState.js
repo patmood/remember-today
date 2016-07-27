@@ -14,7 +14,7 @@ export default {
   //   ]
   // },
   // routing: {},
-  posts: new Immutable.Map,
+  posts: new Immutable.Map(),
   user: {
     isAdmin: undefined
   },
