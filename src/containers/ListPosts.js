@@ -29,8 +29,9 @@ export class ListPosts extends React.Component {
       <div>
         { posts.map((val, key) =>
           <div key={key}>
-          <div className='bold'>{val.get('title')}</div>
-          <div>{val.get('body')}</div>
+            <div className='bold'>{val.get('title')}</div>
+            <div className='muted'>{key}</div>
+            <div>{val.get('body')}</div>
           </div>).toArray()
         }
       </div>

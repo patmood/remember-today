@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { postCreate } from '../actions/postActions'
+import moment from 'moment'
 
 export class EditPost extends React.Component {
   constructor(props, context) {
@@ -12,6 +13,7 @@ export class EditPost extends React.Component {
         body: '',
         title: '',
       },
+      date: moment().format('YYYYMMDD'),
       saving: false
     }
 
@@ -23,15 +25,17 @@ export class EditPost extends React.Component {
     const field = event.target.name
     let post = this.state.post
     post[field] = event.target.value
-    return this.setState({post: post})
+    return this.setState({ post: post })
   }
 
   handleSubmit(event) {
     event.preventDefault()
 
-    this.setState({saving: true})
+    this.setState({ saving: true })
 
-    this.props.actions.postCreate(this.props.user.uid, this.state.post)
+    const { post, date } = this.state
+
+    this.props.actions.postCreate(this.props.user.uid, post, date)
       .then((post) => {
         this.setState({saving: false})
       })

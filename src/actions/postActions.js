@@ -1,11 +1,10 @@
 import firebaseApi from '../FirebaseApi'
 
-export function postCreate(userUID, post) {
+export function postCreate(userUID, post, date) {
   return (dispatch) => {
-    const postKey = firebaseApi.databasePush(`/posts/${userUID}`).key
-    return firebaseApi.databaseSet(`/posts/${userUID}/${postKey}`, post)
+    return firebaseApi.databaseSet(`/posts/${userUID}/${date}`, post)
       .then(() => {
-        dispatch(postCreatedSuccess(userUID, postKey))
+        dispatch(postCreatedSuccess(userUID, date))
         return post
       })
       .catch(error => {
@@ -15,11 +14,11 @@ export function postCreate(userUID, post) {
   }
 }
 
-export function postCreatedSuccess(userUID, postKey) {
+export function postCreatedSuccess(userUID, date) {
   return (dispatch) => {
-    firebaseApi.getChildAddedByKeyOnce(`/posts/${userUID}`, postKey)
+    firebaseApi.getChildAddedByKeyOnce(`/posts/${userUID}`, date)
       .then(post => {
-        dispatch({ type: 'POST_CREATED_SUCCESS', post: post.val(), postKey })
+        dispatch({ type: 'POST_CREATED_SUCCESS', post: post.val(), date })
       })
       .catch(error => {
         // TODO: better error handling
@@ -32,6 +31,7 @@ export function getPosts(userUID) {
   return (dispatch) => {
     firebaseApi.getValueByPathOnce(`/posts/${userUID}`)
       .then(posts => {
+        if (!posts) return null
         dispatch({ type: 'POSTS_FETCHED_SUCCESS', posts: posts.val() })
       })
       .catch(error => {
