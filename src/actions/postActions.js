@@ -5,6 +5,7 @@ export function postCreate(userUID, post, date) {
     return firebaseApi.databaseSet(`/posts/${userUID}/${date}`, post)
       .then(() => {
         dispatch(postCreatedSuccess(userUID, date))
+        firebaseApi.databaseSet(`/days/${userUID}/${date}/post`, true)
         return post
       })
       .catch(error => {
