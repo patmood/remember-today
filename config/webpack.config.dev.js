@@ -36,7 +36,7 @@ module.exports = {
     publicPath: '/'
   },
   resolve: {
-    extensions: ['', '.js'],
+    extensions: ['', '.js', '.jsx'],
   },
   resolveLoader: {
     root: nodeModulesPath,
@@ -52,7 +52,7 @@ module.exports = {
     ],
     loaders: [
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         include: srcPath,
         loader: 'babel',
         query: require('./babel.dev')
