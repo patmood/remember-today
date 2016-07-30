@@ -5,9 +5,17 @@ import mockData from '../../mock-data.json'
 class CalendarChart extends Component {
   constructor (props) {
     super(props)
+    this.handleDayClick = this.handleDayClick.bind(this)
+
     this.state = {
       dayOfWeek: parseInt(moment().format('e')),
     }
+  }
+
+  handleDayClick (e) {
+    e.preventDefault()
+    const date = e.target.dataset.date
+    this.props.onDayClick(date)
   }
 
   render() {
@@ -17,9 +25,18 @@ class CalendarChart extends Component {
         const thisDate = moment().subtract(i, 'day').format('YYYYMMDD')
         const hasPost = this.props.days[thisDate]
         fullYear.push(hasPost ?
-            <a key={thisDate} href='#' className='p1 left'>{thisDate}</a>
+            <a
+              href='#'
+              data-date={thisDate}
+              key={thisDate}
+              onClick={this.handleDayClick}
+              className='p1 left'>{thisDate}</a>
             :
-            <span key={thisDate} className='p1 left'>{thisDate}</span>
+            <span
+              key={thisDate}
+              data-date={thisDate}
+              onClick={this.handleDayClick}
+              className='p1 left'>{thisDate}</span>
         )
     }
 
@@ -32,12 +49,12 @@ class CalendarChart extends Component {
 
 CalendarChart.defaultProps = {
   days: mockData, // TODO: REMOVE ME
-  handleDayClick: () => f,
+  onDayClick: () => {},
 }
 
 CalendarChart.propTypes = {
   days: PropTypes.object,
-  handleDayClick: PropTypes.func,
+  onDayClick: PropTypes.func,
 }
 
 export default CalendarChart

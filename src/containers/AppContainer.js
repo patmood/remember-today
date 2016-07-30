@@ -3,9 +3,10 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { increment } from '../actions/baseActions'
 import { signOut } from '../actions/authActions'
+import { setActivePost } from '../actions/activePostActions'
 
 import Home from '../components/Home'
-import EditPost from './EditPost'
+import ActivePost from './ActivePost'
 import ListPosts from './ListPosts'
 import Registration from './Registration'
 import Signin from './Signin'
@@ -28,9 +29,12 @@ class AppContainer extends React.Component {
         </nav>
         <div>
           <Home />
-          <EditPost />
+          <ActivePost />
           { user ? <ListPosts /> : null }
-          <CalendarChart days={posts} />
+          { user ?
+            <CalendarChart days={posts} onDayClick={actions.setActivePost.bind(null, user.uid)} />
+            : null
+          }
           <Registration />
           <Signin />
         </div>
@@ -54,7 +58,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators({ increment, signOut }, dispatch)
+    actions: bindActionCreators({ increment, signOut, setActivePost }, dispatch)
   }
 }
 

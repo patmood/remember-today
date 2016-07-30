@@ -1,11 +1,11 @@
 import firebaseApi from '../FirebaseApi'
 
-export function postCreate(userUID, post, date) {
+export function postCreate(userUID, post) {
   return (dispatch) => {
-    return firebaseApi.databaseSet(`/posts/${userUID}/${date}`, post)
+    return firebaseApi.databaseSet(`/posts/${userUID}/${post.date}`, post)
       .then(() => {
-        dispatch(postCreatedSuccess(userUID, date))
-        firebaseApi.databaseSet(`/days/${userUID}/${date}/post`, true)
+        dispatch(postCreatedSuccess(userUID, post.date))
+        firebaseApi.databaseSet(`/days/${userUID}/${post.date}/post`, true)
         return post
       })
       .catch(error => {

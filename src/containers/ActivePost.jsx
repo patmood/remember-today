@@ -4,21 +4,23 @@ import { bindActionCreators } from 'redux'
 import { postCreate } from '../actions/postActions'
 import moment from 'moment'
 
-export class EditPost extends React.Component {
+export class ActivePost extends React.Component {
   constructor(props, context) {
     super(props, context)
 
     this.state = {
-      post: {
-        body: '',
-        title: '',
-      },
-      date: moment().format('YYYYMMDD'),
-      saving: false
+      post: props.activePost,
+      saving: false,
     }
 
     this.updatePostState = this.updatePostState.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.activePost.title !== this.props.activePost.title) {
+      this.setState({ post: nextProps.activePost })
+    }
   }
 
   updatePostState(event) {
@@ -33,9 +35,9 @@ export class EditPost extends React.Component {
 
     this.setState({ saving: true })
 
-    const { post, date } = this.state
+    const { post } = this.state
 
-    this.props.actions.postCreate(this.props.user.uid, post, date)
+    this.props.actions.postCreate(this.props.user.uid, post)
       .then((post) => {
         this.setState({saving: false})
       })
@@ -46,19 +48,27 @@ export class EditPost extends React.Component {
   }
 
   render() {
-    const { saving } = this.state
+    const { activePost } = this.props
+    const { saving, post } = this.state
     return <form>
       <h1>Create Post</h1>
       <textarea
-        type='text'
         name='title'
+        value={post.title}
         placeholder='Title of today'
         className='input'
         onChange={this.updatePostState} >
       </textarea>
-      <textarea
+      <input
         type='text'
+        name='date'
+        value={post.date}
+        placeholder='Date'
+        className='input'
+        onChange={this.updatePostState} />
+      <textarea
         name='body'
+        value={post.body}
         placeholder='What happened today?'
         className='input'
         style={{ minHeight: 200 }}
@@ -75,13 +85,14 @@ export class EditPost extends React.Component {
   }
 }
 
-EditPost.propTypes = {
+ActivePost.propTypes = {
   actions: PropTypes.object.isRequired
 }
 
 function mapStateToProps(state, ownProps) {
   return {
     user: state.user,
+    activePost: state.activePost,
   }
 }
 
@@ -91,4 +102,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditPost)
+export default connect(mapStateToProps, mapDispatchToProps)(ActivePost)

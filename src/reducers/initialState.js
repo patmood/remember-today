@@ -1,4 +1,5 @@
 import Immutable from 'immutable'
+import moment from 'moment'
 
 export default {
   base: {
@@ -15,6 +16,11 @@ export default {
   // },
   // routing: {},
   posts: new Immutable.Map(),
+  activePost: {
+    date: moment().format('YYYYMMDD'),
+    title: '',
+    body: '',
+  },
   user: null,
   auth: {
     isLogged: false,

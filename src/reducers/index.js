@@ -4,6 +4,7 @@ import pendingRequest from './pendingRequestReducer'
 import auth from './authReducer'
 import user from './userReducer'
 import posts from './postReducer'
+import activePost from './activePostReducer'
 
 const rootReducer = combineReducers({
   base,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   auth,
   user,
   posts,
+  activePost,
 })
 
 export default rootReducer
