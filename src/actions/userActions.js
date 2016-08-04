@@ -1,7 +1,6 @@
 import firebaseApi from '../FirebaseApi'
 
 import { authLoggedIn } from './authActions'
-import { requestError, beginRequest } from './pendingRequestActions'
 
 function extractUserProperties(firebaseUser) {
 
@@ -30,7 +29,6 @@ function extractUserProperties(firebaseUser) {
 
 export function userCreated(user) {
   return (dispatch) => {
-    beginRequest()
     return firebaseApi.databaseSet('/users/' + user.uid, extractUserProperties(user))
       .then(() => {
         dispatch(authLoggedIn(user.uid))
@@ -38,7 +36,6 @@ export function userCreated(user) {
         return user
       })
       .catch(error => {
-        dispatch(requestError(error))
         // @TODO better error handling
         throw(error)
       })

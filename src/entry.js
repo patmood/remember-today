@@ -9,14 +9,12 @@ import './css/index.scss'
 
 // actions
 import { authInitialized } from './actions/authActions'
-import { requestError, beginRequest } from './actions/pendingRequestActions'
 
 // Store
 import initialState from './reducers/initialState';
 import configureStore from './configureStore';
 const store = configureStore(initialState);
 
-store.dispatch(beginRequest())
 FirebaseApi
   .initAuth()
   .then(user => {
@@ -24,7 +22,7 @@ FirebaseApi
 
     ReactDOM.render(
       <Provider store={store}>
-      <AppContainer />
+        <AppContainer />
       </Provider>,
       document.getElementById('root')
     )
@@ -32,5 +30,4 @@ FirebaseApi
   .catch(err => {
     console.log('Firebase auth error:', err)
     //TODO dispatch auth error action
-    store.dispatch(requestError())
   })

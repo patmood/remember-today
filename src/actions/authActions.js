@@ -2,7 +2,6 @@ import firebaseApi from '../FirebaseApi'
 
 import { userLoadedSuccess, userCreated } from './userActions'
 import { getPosts } from './postActions'
-import { requestError, beginRequest } from './pendingRequestActions'
 
 export function authInitialized(user) {
   return (dispatch) => {
@@ -18,7 +17,6 @@ export function authInitialized(user) {
 export function authLoggedIn(userUID) {
   return (dispatch) => {
     dispatch(authLoggedInSuccess(userUID))
-    dispatch(beginRequest())
     firebaseApi.getChildAddedByKeyOnce('/users', userUID)
       .then(user => {
         dispatch(userLoadedSuccess(user.val()))
@@ -26,7 +24,6 @@ export function authLoggedIn(userUID) {
         // TODO: dispatch action to navigate somewhere here
       })
       .catch(error => {
-        dispatch(beginRequest())
         // TODO: better error handling
         throw(error)
       })
@@ -35,12 +32,10 @@ export function authLoggedIn(userUID) {
 
 export function createUserWithEmailAndPassword(user) {
   return (dispatch) => {
-    dispatch(beginRequest())
     return firebaseApi.createUserWithEmailAndPassword(user)
       .then(user => {
         return dispatch(userCreated(user))
       }).catch(error => {
-        dispatch(requestError(error))
         // @TODO better error handling
         throw(error)
       })
@@ -49,14 +44,12 @@ export function createUserWithEmailAndPassword(user) {
 
 export function signInWithEmailAndPassword(user) {
   return (dispatch) => {
-    dispatch(beginRequest())
     return firebaseApi.signInWithEmailAndPassword(user)
       .then(
         user => {
           dispatch(authLoggedIn(user.uid))
         })
       .catch(error => {
-        dispatch(requestError(error))
         // @TODO better error handling
         throw(error)
       })
@@ -65,7 +58,6 @@ export function signInWithEmailAndPassword(user) {
 
 export function signOut() {
   return (dispatch, getState) => {
-    dispatch(beginRequest())
     return firebaseApi.authSignOut()
       .then(
         () => {
@@ -73,7 +65,6 @@ export function signOut() {
           // Redirect if they're on a page that requires auth
         })
       .catch(error => {
-        dispatch(requestError(error))
         // @TODO better error handling
         throw(error)
       })
