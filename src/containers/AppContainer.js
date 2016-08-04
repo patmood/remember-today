@@ -7,7 +7,6 @@ import { setActivePost } from '../actions/activePostActions'
 
 import Home from '../components/Home'
 import ActivePost from './ActivePost'
-import ListPosts from './ListPosts'
 import Registration from './Registration'
 import Signin from './Signin'
 import CalendarChart from '../components/CalendarChart'
@@ -30,7 +29,6 @@ class AppContainer extends React.Component {
         <div>
           <Home />
           <ActivePost />
-          { user ? <ListPosts /> : null }
           { user ?
             <CalendarChart days={posts} onDayClick={actions.setActivePost.bind(null, user.uid)} />
             : null

@@ -1,6 +1,7 @@
 import firebaseApi from '../FirebaseApi'
 
 import { userLoadedSuccess, userCreated } from './userActions'
+import { getPosts } from './postActions'
 import { requestError, beginRequest } from './pendingRequestActions'
 
 export function authInitialized(user) {
@@ -21,6 +22,7 @@ export function authLoggedIn(userUID) {
     firebaseApi.getChildAddedByKeyOnce('/users', userUID)
       .then(user => {
         dispatch(userLoadedSuccess(user.val()))
+        dispatch(getPosts(userUID))
         // TODO: dispatch action to navigate somewhere here
       })
       .catch(error => {
