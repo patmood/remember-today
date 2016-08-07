@@ -19,7 +19,6 @@ class AppContainer extends React.Component {
       <div className='p2'>
         <h1>AppContainer</h1>
         <nav className='mb2'>
-          <button onClick={actions.increment} className='btn left'>+1 ({base.counter})</button>
           <button onClick={actions.signOut} className='btn btn-primary bg-red right'>Sign out</button>
           <div className='inline-block right'>
             { user ? user.email : null }
