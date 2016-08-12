@@ -9,7 +9,7 @@ export class ActivePost extends React.Component {
     super(props, context)
 
     this.state = {
-      post: props.activePost,
+      post: props.activePost.toJS(),
       saving: false,
     }
 
@@ -18,9 +18,7 @@ export class ActivePost extends React.Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    if (nextProps.activePost.title !== this.props.activePost.title) {
-      this.setState({ post: nextProps.activePost })
-    }
+    this.setState({ post: nextProps.activePost.toJS() })
   }
 
   updatePostState(event) {
@@ -48,7 +46,6 @@ export class ActivePost extends React.Component {
   }
 
   render() {
-    const { activePost } = this.props
     const { saving, post } = this.state
     return <form>
       <h1>Create Post</h1>

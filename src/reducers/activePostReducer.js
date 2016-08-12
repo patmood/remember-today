@@ -1,9 +1,12 @@
 import initialState from './initialState'
+import { Map } from 'immutable'
 
-export default function activePostReducer(state = initialState.activePost, action) {
+// eslint-disable-next-line
+export default function activePostReducer(state = Map(initialState.activePost), action) {
   switch (action.type) {
     case 'SET_ACTIVE_POST':
-      return action.post
+      // eslint-disable-next-line
+      return Map(action.post)
     default:
       return state
   }

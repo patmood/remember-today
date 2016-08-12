@@ -9,21 +9,9 @@ import LandingContainer from './LandingContainer'
 
 class AppContainer extends React.Component {
   render () {
-    const { user, actions } = this.props
+    const { user } = this.props
 
-    return (
-      <div className='p2'>
-        <nav className='mb2'>
-          <button onClick={actions.signOut} className='btn btn-primary bg-red right'>Sign out</button>
-          <div className='inline-block right'>
-            { user ? user.email : null }
-          </div>
-        </nav>
-        <div>
-          { user ? <AuthedContainer /> : <LandingContainer /> }
-        </div>
-      </div>
-    )
+    return user ? <AuthedContainer /> : <LandingContainer />
   }
 }
 

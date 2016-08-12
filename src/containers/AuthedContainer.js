@@ -10,16 +10,29 @@ import ActivePost from './ActivePost'
 import CalendarChart from '../components/CalendarChart'
 
 class AuthedContainer extends React.Component {
+  constructor (props) {
+    super(props)
+    this.setActivePost = this.setActivePost.bind(this)
+  }
+
+  setActivePost (date) {
+    this.props.actions.setActivePost(this.props.user.uid, date)
+  }
+
   render () {
     const { user, posts, actions } = this.props
 
     return (
       <div className='p2'>
+        <div>
+          <span>{user.email}</span>
+          <button onClick={actions.signOut} className='btn btn-primary bg-red right'>Sign out</button>
+        </div>
         <h1>AuthedContainer</h1>
         <Home />
         <ActivePost />
         { user ?
-          <CalendarChart days={posts} onDayClick={actions.setActivePost.bind(null, user.uid)} />
+          <CalendarChart days={posts} onDayClick={this.setActivePost} />
           : null
         }
       </div>
